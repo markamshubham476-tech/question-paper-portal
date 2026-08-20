@@ -1,1 +1,1570 @@
-sb_publishable_NaNuuZFDV-9T2iaVkqBPVg_tFH-4WcM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MPMSU Question Paper Portal</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:linear-gradient(135deg,#174ea6,#2878d7);
+  color:white;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-icon{
+  width:45px;
+  height:45px;
+  background:white;
+  color:#174ea6;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.logo h1{
+  font-size:20px;
+}
+
+.logo p{
+  font-size:12px;
+  opacity:.9;
+  margin-top:3px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:18px;
+  font-size:14px;
+}
+
+.admin-btn{
+  background:white;
+  color:#1769d1;
+  border:none;
+  padding:9px 14px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-left:12px;
+}
+
+.hero{
+  padding:55px 6%;
+  text-align:center;
+  background:white;
+}
+
+.hero h2{
+  font-size:34px;
+  color:#123b78;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:#667085;
+  margin-bottom:25px;
+}
+
+.search-box{
+  max-width:650px;
+  margin:auto;
+  display:flex;
+  background:white;
+  border:1px solid #d7dce5;
+  border-radius:50px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.search-box input{
+  flex:1;
+  border:none;
+  outline:none;
+  padding:16px 22px;
+  font-size:15px;
+}
+
+.search-box button{
+  border:none;
+  background:#1769d1;
+  color:white;
+  padding:0 28px;
+  cursor:pointer;
+}
+
+.container{
+  width:88%;
+  max-width:1200px;
+  margin:35px auto;
+}
+
+.filters{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:30px;
+}
+
+select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d6dce5;
+  border-radius:8px;
+  outline:none;
+  background:white;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.section-title h3{
+  font-size:22px;
+}
+
+.count{
+  color:#667085;
+  font-size:14px;
+}
+
+.papers{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.paper-card{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 5px 18px rgba(0,0,0,.07);
+  transition:.2s;
+}
+
+.paper-card:hover{
+  transform:translateY(-4px);
+}
+
+.pdf-icon{
+  width:50px;
+  height:50px;
+  background:#fff0f0;
+  color:#d62828;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.paper-card h4{
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+.meta{
+  font-size:13px;
+  color:#667085;
+  line-height:1.8;
+}
+
+.tags{
+  margin:12px 0;
+}
+
+.tag{
+  display:inline-block;
+  background:#eaf2ff;
+  color:#1769d1;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  margin-right:5px;
+}
+
+.buttons{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.btn{
+  flex:1;
+  padding:10px;
+  border-radius:7px;
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  text-align:center;
+  font-size:13px;
+}
+
+.view{
+  background:#eaf2ff;
+  color:#1769d1;
+}
+
+.download{
+  background:#1769d1;
+  color:white;
+}
+
+.delete{
+  background:#ffe8e8;
+  color:#d62828;
+}
+
+.upload-section{
+  display:none;
+  background:white;
+  margin-top:45px;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.upload-section h3{
+  margin-bottom:20px;
+}
+
+.admin-status{
+  background:#eaf7ee;
+  color:#187a3d;
+  padding:12px 15px;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:bold;
+}
+
+.form-group input,
+.form-group select{
+  padding:12px;
+  border:1px solid #d6dce5;
+  border-radius:8px;
+}
+
+.upload-btn{
+  background:#1769d1;
+  color:white;
+  border:none;
+  padding:13px 25px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:18px;
+  font-weight:bold;
+}
+
+.logout-btn{
+  background:#d62828;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:7px;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+.login-box{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:1000;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.login-card{
+  background:white;
+  width:100%;
+  max-width:400px;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 10px 40px rgba(0,0,0,.25);
+}
+
+.login-card h2{
+  color:#123b78;
+  margin-bottom:8px;
+}
+
+.login-card p{
+  color:#667085;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.login-card input{
+  width:100%;
+  padding:13px;
+  margin-bottom:12px;
+  border:1px solid #d6dce5;
+  border-radius:8px;
+  outline:none;
+}
+
+.login-submit{
+  width:100%;
+  padding:13px;
+  background:#1769d1;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.close-login{
+  float:right;
+  border:none;
+  background:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.empty,
+.loading{
+  grid-column:1/-1;
+  text-align:center;
+  padding:50px;
+  color:#667085;
+}
+
+footer{
+  background:#10213f;
+  color:white;
+  text-align:center;
+  padding:30px 10px;
+  margin-top:60px;
+}
+
+footer p{
+  opacity:.8;
+  font-size:13px;
+  margin-top:8px;
+}
+
+@media(max-width:850px){
+  .papers{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .filters{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  header{
+    padding:15px 5%;
+  }
+
+  nav a{
+    display:none;
+  }
+
+  .hero{
+    padding:40px 5%;
+  }
+
+  .hero h2{
+    font-size:26px;
+  }
+
+  .container{
+    width:92%;
+  }
+
+  .papers{
+    grid-template-columns:1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .logo h1{
+    font-size:16px;
+  }
+
+  .logo p{
+    font-size:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+  <div class="logo-icon">QP</div>
+
+  <div>
+    <h1>Question Paper Portal</h1>
+    <p>MPMSU • Jabalpur</p>
+  </div>
+</div>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#papers">Papers</a>
+
+  <button class="admin-btn" id="loginButton" onclick="openLogin()">
+    Admin Login
+  </button>
+</nav>
+
+</header>
+
+
+<section class="hero" id="home">
+
+<h2>Previous Year Question Papers</h2>
+
+<p>
+Find and download previous year question papers easily.
+</p>
+
+<div class="search-box">
+
+<input
+  type="text"
+  id="searchInput"
+  placeholder="Search subject, year or paper..."
+  oninput="filterPapers()"
+>
+
+<button onclick="filterPapers()">
+Search
+</button>
+
+</div>
+
+</section>
+
+
+<main class="container">
+
+<div class="filters">
+
+<select id="courseFilter" onchange="filterPapers()">
+<option value="">All Courses</option>
+<option value="BMLT">BMLT</option>
+<option value="B.Sc">B.Sc</option>
+<option value="DMLT">DMLT</option>
+</select>
+
+<select id="yearFilter" onchange="filterPapers()">
+<option value="">All Years</option>
+<option value="1st Year">1st Year</option>
+<option value="2nd Year">2nd Year</option>
+<option value="3rd Year">3rd Year</option>
+</select>
+
+<select id="subjectFilter" onchange="filterPapers()">
+<option value="">All Subjects</option>
+<option value="Microbiology">Microbiology</option>
+<option value="Hematology">Hematology</option>
+<option value="Biochemistry">Biochemistry</option>
+<option value="Anatomy">Anatomy</option>
+<option value="Physiology">Physiology</option>
+<option value="Pathology">Pathology</option>
+</select>
+
+<select id="paperYearFilter" onchange="filterPapers()">
+<option value="">All Exam Years</option>
+<option value="2026">2026</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+</select>
+
+</div>
+
+
+<section id="papers">
+
+<div class="section-title">
+
+<h3>Question Papers</h3>
+
+<span class="count" id="paperCount">
+Loading...
+</span>
+
+</div>
+
+<div class="papers" id="papersContainer">
+
+<div class="loading">
+Loading question papers...
+</div>
+
+</div>
+
+</section>
+
+
+<section class="upload-section" id="upload">
+
+<div class="admin-status">
+🔐 You are logged in as Admin.
+</div>
+
+<h3>⬆️ Upload Question Paper</h3>
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Paper Title</label>
+
+<input
+id="title"
+type="text"
+placeholder="Example: BMLT Microbiology">
+</div>
+
+
+<div class="form-group">
+<label>Course</label>
+
+<select id="course">
+<option value="BMLT">BMLT</option>
+<option value="B.Sc">B.Sc</option>
+<option value="DMLT">DMLT</option>
+</select>
+</div>
+
+
+<div class="form-group">
+<label>Year</label>
+
+<select id="studyYear">
+<option value="1st Year">1st Year</option>
+<option value="2nd Year">2nd Year</option>
+<option value="3rd Year">3rd Year</option>
+</select>
+</div>
+
+
+<div class="form-group">
+<label>Subject</label>
+
+<select id="subject">
+<option value="Microbiology">Microbiology</option>
+<option value="Hematology">Hematology</option>
+<option value="Biochemistry">Biochemistry</option>
+<option value="Anatomy">Anatomy</option>
+<option value="Physiology">Physiology</option>
+<option value="Pathology">Pathology</option>
+</select>
+</div>
+
+
+<div class="form-group">
+<label>Exam Year</label>
+
+<input
+id="examYear"
+type="number"
+placeholder="2026"
+min="2000"
+max="2100">
+</div>
+
+
+<div class="form-group">
+<label>Question Paper PDF</label>
+
+<input
+id="pdfFile"
+type="file"
+accept="application/pdf,.pdf">
+</div>
+
+</div>
+
+
+<button class="upload-btn" onclick="uploadPaper()">
+Upload Paper
+</button>
+
+<br>
+
+<button class="logout-btn" onclick="logout()">
+Logout Admin
+</button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<strong>MPMSU Question Paper Portal</strong>
+
+<p>
+Previous Year Question Papers • BMLT • Medical Courses
+</p>
+
+<p>
+© 2026 Question Paper Portal
+</p>
+
+</footer>
+
+
+<div class="login-box" id="loginBox">
+
+<div class="login-card">
+
+<button class="close-login" onclick="closeLogin()">
+×
+</button>
+
+<h2>Admin Login</h2>
+
+<p>
+Login to upload and manage question papers.
+</p>
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Admin Email">
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password">
+
+<button
+class="login-submit"
+onclick="login()">
+Login
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   SUPABASE CONFIG
+========================================== */
+
+const SUPABASE_URL =
+"https://geagdgxowrhgmcaynoqe.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_NaNuuZFDV-9T2iaVkqBPVg_tFH-4WcM";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let papers = [];
+let currentUser = null;
+
+
+/* ==========================================
+   SECURITY / HTML ESCAPE
+========================================== */
+
+function escapeHTML(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   LOGIN CHECK
+========================================== */
+
+async function checkUser(){
+
+const {
+  data,
+  error
+} = await supabaseClient.auth.getUser();
+
+if(error || !data.user){
+
+currentUser = null;
+
+}else{
+
+currentUser = data.user;
+
+}
+
+updateAdminUI();
+
+}
+
+
+/* ==========================================
+   ADMIN UI
+========================================== */
+
+function updateAdminUI(){
+
+const upload =
+document.getElementById("upload");
+
+const loginButton =
+document.getElementById("loginButton");
+
+
+if(currentUser){
+
+upload.style.display = "block";
+
+loginButton.innerText =
+"Admin Panel";
+
+loginButton.onclick = function(){
+
+upload.scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+}else{
+
+upload.style.display = "none";
+
+loginButton.innerText =
+"Admin Login";
+
+loginButton.onclick =
+openLogin;
+
+}
+
+displayPapers();
+
+}
+
+
+/* ==========================================
+   LOGIN MODAL
+========================================== */
+
+function openLogin(){
+
+document.getElementById("loginBox")
+.style.display="flex";
+
+}
+
+
+function closeLogin(){
+
+document.getElementById("loginBox")
+.style.display="none";
+
+}
+
+
+/* ==========================================
+   ADMIN LOGIN
+========================================== */
+
+async function login(){
+
+const email =
+document.getElementById("loginEmail")
+.value.trim();
+
+const password =
+document.getElementById("loginPassword")
+.value;
+
+
+if(!email || !password){
+
+alert("Please enter email and password.");
+
+return;
+
+}
+
+
+const {
+data,
+error
+} =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+alert(
+"Login failed: " +
+error.message
+);
+
+return;
+
+}
+
+
+currentUser =
+data.user;
+
+closeLogin();
+
+updateAdminUI();
+
+alert("Admin login successful!");
+
+document.getElementById("upload")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+async function logout(){
+
+const {
+error
+} =
+await supabaseClient.auth.signOut();
+
+
+if(error){
+
+alert(
+"Logout failed: " +
+error.message
+);
+
+return;
+
+}
+
+
+currentUser = null;
+
+updateAdminUI();
+
+alert("Admin logged out.");
+
+}
+
+
+/* ==========================================
+   LOAD PAPERS
+========================================== */
+
+async function loadPapers(){
+
+const container =
+document.getElementById("papersContainer");
+
+container.innerHTML = `
+<div class="loading">
+Loading question papers...
+</div>
+`;
+
+
+const {
+data,
+error
+} =
+await supabaseClient
+.from("papers")
+.select("*")
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(error);
+
+container.innerHTML = `
+<div class="empty">
+
+<h3>Unable to load papers</h3>
+
+<p>
+${escapeHTML(error.message)}
+</p>
+
+</div>
+`;
+
+document.getElementById("paperCount")
+.innerText="0 papers";
+
+return;
+
+}
+
+
+papers =
+data || [];
+
+displayPapers();
+
+}
+
+
+/* ==========================================
+   DISPLAY PAPERS
+========================================== */
+
+function displayPapers(list = papers){
+
+const container =
+document.getElementById(
+"papersContainer"
+);
+
+const count =
+document.getElementById(
+"paperCount"
+);
+
+
+container.innerHTML="";
+
+count.innerText =
+list.length +
+" paper(s) found";
+
+
+if(list.length===0){
+
+container.innerHTML=`
+
+<div class="empty">
+
+<h3>No Question Paper Found</h3>
+
+<p>
+Try another search or filter.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+list.forEach(paper=>{
+
+const card =
+document.createElement("div");
+
+card.className =
+"paper-card";
+
+
+const fileURL =
+paper.file_url || "";
+
+
+card.innerHTML=`
+
+<div class="pdf-icon">
+PDF
+</div>
+
+<h4>
+${escapeHTML(paper.title)}
+</h4>
+
+<div class="meta">
+
+Course:
+${escapeHTML(paper.course)}
+<br>
+
+Year:
+${escapeHTML(paper.year)}
+<br>
+
+Subject:
+${escapeHTML(paper.subject)}
+<br>
+
+Exam:
+${escapeHTML(paper.exam_year)}
+
+</div>
+
+<div class="tags">
+
+<span class="tag">
+${escapeHTML(paper.course)}
+</span>
+
+<span class="tag">
+${escapeHTML(paper.exam_year)}
+</span>
+
+</div>
+
+<div class="buttons">
+
+${
+fileURL
+?
+`
+<a
+class="btn view"
+href="${escapeHTML(fileURL)}"
+target="_blank">
+View
+</a>
+
+<a
+class="btn download"
+href="${escapeHTML(fileURL)}"
+download>
+Download
+</a>
+`
+:
+`
+<button class="btn view" disabled>
+PDF Missing
+</button>
+`
+}
+
+${
+currentUser
+?
+`
+<button
+class="btn delete"
+onclick="deletePaper('${paper.id}')">
+Delete
+</button>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* ==========================================
+   SEARCH + FILTER
+========================================== */
+
+function filterPapers(){
+
+const search =
+document.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
+
+const course =
+document.getElementById("courseFilter")
+.value;
+
+const year =
+document.getElementById("yearFilter")
+.value;
+
+const subject =
+document.getElementById("subjectFilter")
+.value;
+
+const examYear =
+document.getElementById("paperYearFilter")
+.value;
+
+
+const filtered =
+papers.filter(paper=>{
+
+const searchable = [
+
+paper.title,
+paper.course,
+paper.year,
+paper.subject,
+paper.exam_year
+
+]
+.join(" ")
+.toLowerCase();
+
+
+return(
+
+searchable.includes(search)
+
+&&
+
+(!course ||
+paper.course===course)
+
+&&
+
+(!year ||
+paper.year===year)
+
+&&
+
+(!subject ||
+paper.subject===subject)
+
+&&
+
+(!examYear ||
+String(paper.exam_year)===examYear)
+
+);
+
+});
+
+
+displayPapers(filtered);
+
+}
+
+
+/* ==========================================
+   UPLOAD PAPER
+========================================== */
+
+async function uploadPaper(){
+
+if(!currentUser){
+
+alert("Please login as Admin first.");
+
+openLogin();
+
+return;
+
+}
+
+
+const title =
+document.getElementById("title")
+.value.trim();
+
+const course =
+document.getElementById("course")
+.value;
+
+const studyYear =
+document.getElementById("studyYear")
+.value;
+
+const subject =
+document.getElementById("subject")
+.value;
+
+const examYear =
+document.getElementById("examYear")
+.value;
+
+const file =
+document.getElementById("pdfFile")
+.files[0];
+
+
+if(!title || !examYear || !file){
+
+alert(
+"Please enter all details and select a PDF."
+);
+
+return;
+
+}
+
+
+if(file.type!=="application/pdf"){
+
+alert("Only PDF files are allowed.");
+
+return;
+
+}
+
+
+if(file.size > 10 * 1024 * 1024){
+
+alert("PDF size must be less than 10 MB.");
+
+return;
+
+}
+
+
+const button =
+document.querySelector(".upload-btn");
+
+button.disabled=true;
+
+button.innerText="Uploading...";
+
+
+try{
+
+const fileName =
+Date.now() +
+"_" +
+file.name.replace(
+/[^a-zA-Z0-9._-]/g,
+"_"
+);
+
+
+const filePath =
+fileName;
+
+
+/* Upload PDF */
+
+const {
+error:uploadError
+} =
+await supabaseClient
+.storage
+.from("question-papers")
+.upload(
+filePath,
+file,
+{
+contentType:"application/pdf",
+upsert:false
+}
+);
+
+
+if(uploadError){
+
+throw uploadError;
+
+}
+
+
+/* Get public URL */
+
+const {
+data:publicData
+} =
+supabaseClient
+.storage
+.from("question-papers")
+.getPublicUrl(filePath);
+
+
+const fileURL =
+publicData.publicUrl;
+
+
+/* Save paper information */
+
+const {
+error:insertError
+} =
+await supabaseClient
+.from("papers")
+.insert({
+
+title:title,
+
+course:course,
+
+year:studyYear,
+
+subject:subject,
+
+exam_year:Number(examYear),
+
+file_url:fileURL
+
+});
+
+
+if(insertError){
+
+/* Delete uploaded file if DB insert fails */
+
+await supabaseClient
+.storage
+.from("question-papers")
+.remove([filePath]);
+
+throw insertError;
+
+}
+
+
+/* Reset form */
+
+document.getElementById("title")
+.value="";
+
+document.getElementById("examYear")
+.value="";
+
+document.getElementById("pdfFile")
+.value="";
+
+
+alert(
+"Question paper uploaded successfully!"
+);
+
+await loadPapers();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Upload failed:\n" +
+error.message
+);
+
+}finally{
+
+button.disabled=false;
+
+button.innerText="Upload Paper";
+
+}
+
+}
+
+
+/* ==========================================
+   DELETE PAPER
+========================================== */
+
+async function deletePaper(id){
+
+if(!currentUser){
+
+alert("Admin login required.");
+
+return;
+
+}
+
+
+const paper =
+papers.find(
+p=>String(p.id)===String(id)
+);
+
+
+if(!paper){
+
+alert("Paper not found.");
+
+return;
+
+}
+
+
+const confirmDelete =
+confirm(
+"Are you sure you want to delete this question paper?"
+);
+
+
+if(!confirmDelete){
+
+return;
+
+}
+
+
+try{
+
+/* Find file path from URL */
+
+let filePath = null;
+
+if(paper.file_url){
+
+try{
+
+const url =
+new URL(paper.file_url);
+
+const marker =
+"/object/public/question-papers/";
+
+const index =
+url.pathname.indexOf(marker);
+
+if(index !== -1){
+
+filePath =
+decodeURIComponent(
+url.pathname.substring(
+index + marker.length
+)
+);
+
+}
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+
+/* Delete database row first */
+
+const {
+error:dbError
+} =
+await supabaseClient
+.from("papers")
+.delete()
+.eq("id",id);
+
+
+if(dbError){
+
+throw dbError;
+
+}
+
+
+/* Delete PDF from Storage */
+
+if(filePath){
+
+const {
+error:storageError
+} =
+await supabaseClient
+.storage
+.from("question-papers")
+.remove(
