@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MPMSU Question Paper Portal</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #174ea6, #2878d7);
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: white;
+      color: #174ea6;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+    }
+
+    .logo p {
+      font-size: 12px;
+      opacity: .9;
+      margin-top: 3px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 55px 6%;
+      text-align: center;
+      background: white;
+    }
+
+    .hero h2 {
+      font-size: 34px;
+      color: #123b78;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #667085;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+      display: flex;
+      background: white;
+      border: 1px solid #d7dce5;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 16px 22px;
+      font-size: 15px;
+    }
+
+    .search-box button {
+      border: none;
+      background: #1769d1;
+      color: white;
+      padding: 0 28px;
+      cursor: pointer;
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 88%;
+      max-width: 1200px;
+      margin: 35px auto;
+    }
+
+    /* FILTERS */
+    .filters {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6dce5;
+      border-radius: 8px;
+      outline: none;
+      background: white;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .section-title h3 {
+      font-size: 22px;
+    }
+
+    .count {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    /* CARDS */
+    .papers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .paper-card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.07);
+      transition: .2s;
+    }
+
+    .paper-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+    .pdf-icon {
+      width: 50px;
+      height: 50px;
+      background: #fff0f0;
+      color: #d62828;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .paper-card h4 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: #667085;
+      line-height: 1.8;
+    }
+
+    .tags {
+      margin: 12px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eaf2ff;
+      color: #1769d1;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      margin-right: 5px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .view {
+      background: #eaf2ff;
+      color: #1769d1;
+    }
+
+    .download {
+      background: #1769d1;
+      color: white;
+    }
+
+    .delete {
+      background: #ffe8e8;
+      color: #d62828;
+    }
+
+    /* UPLOAD */
+    .upload-section {
+      background: white;
+      margin-top: 45px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.06);
+    }
+
+    .upload-section h3 {
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 12px;
+      border: 1px solid #d6dce5;
+      border-radius: 8px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .upload-btn {
+      background: #1769d1;
+      color: white;
+      border: none;
+      padding: 13px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #10213f;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      opacity: .8;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    /* EMPTY */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px;
+      color: #667085;
+    }
+
+    /* MOBILE */
+    @media(max-width: 850px) {
+      .papers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width: 600px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 40px 5%;
+      }
+
+      .hero h2 {
+        font-size: 26px;
+      }
+
+      .search-box button {
+        padding: 0 18px;
+      }
+
+      .container {
+        width: 92%;
+      }
+
+      .papers {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">QP</div>
+    <div>
+      <h1>Question Paper Portal</h1>
+      <p>MPMSU • Jabalpur</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#papers">Papers</a>
+    <a href="#upload">Upload</a>
+  </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <h2>Previous Year Question Papers</h2>
+
+  <p>
+    Find and download previous year question papers easily.
+  </p>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search subject, year or paper..."
+      oninput="filterPapers()"
+    >
+
+    <button onclick="filterPapers()">Search</button>
+  </div>
+
+</section>
+
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- FILTERS -->
+  <div class="filters">
+
+    <select id="courseFilter" onchange="filterPapers()">
+      <option value="">All Courses</option>
+      <option value="BMLT">BMLT</option>
+      <option value="B.Sc">B.Sc</option>
+      <option value="DMLT">DMLT</option>
+    </select>
+
+    <select id="yearFilter" onchange="filterPapers()">
+      <option value="">All Years</option>
+      <option value="1st Year">1st Year</option>
+      <option value="2nd Year">2nd Year</option>
+      <option value="3rd Year">3rd Year</option>
+    </select>
+
+    <select id="subjectFilter" onchange="filterPapers()">
+      <option value="">All Subjects</option>
+      <option value="Microbiology">Microbiology</option>
+      <option value="Hematology">Hematology</option>
+      <option value="Biochemistry">Biochemistry</option>
+      <option value="Anatomy">Anatomy</option>
+      <option value="Physiology">Physiology</option>
+      <option value="Pathology">Pathology</option>
+    </select>
+
+    <select id="paperYearFilter" onchange="filterPapers()">
+      <option value="">All Exam Years</option>
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+    </select>
+
+  </div>
+
+
+  <!-- PAPERS -->
+  <section id="papers">
+
+    <div class="section-title">
+      <h3>Question Papers</h3>
+      <span class="count" id="paperCount"></span>
+    </div>
+
+    <div class="papers" id="papersContainer"></div>
+
+  </section>
+
+
+  <!-- UPLOAD -->
+  <section class="upload-section" id="upload">
+
+    <h3>⬆️ Upload Question Paper</h3>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Paper Title</label>
+        <input id="title" type="text"
+          placeholder="Example: BMLT Microbiology">
+      </div>
+
+      <div class="form-group">
+        <label>Course</label>
+
+        <select id="course">
+          <option value="BMLT">BMLT</option>
+          <option value="B.Sc">B.Sc</option>
+          <option value="DMLT">DMLT</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Year</label>
+
+        <select id="studyYear">
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Subject</label>
+
+        <select id="subject">
+          <option value="Microbiology">Microbiology</option>
+          <option value="Hematology">Hematology</option>
+          <option value="Biochemistry">Biochemistry</option>
+          <option value="Anatomy">Anatomy</option>
+          <option value="Physiology">Physiology</option>
+          <option value="Pathology">Pathology</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Exam Year</label>
+
+        <input
+          id="examYear"
+          type="number"
+          placeholder="2026"
+          min="2000"
+          max="2100"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Question Paper PDF</label>
+
+        <input
+          id="pdfFile"
+          type="file"
+          accept=".pdf"
+        >
+      </div>
+
+    </div>
+
+    <button class="upload-btn" onclick="uploadPaper()">
+      Upload Paper
+    </button>
+
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <strong>MPMSU Question Paper Portal</strong>
+
+  <p>
+    Previous Year Question Papers • BMLT • Medical Courses
+  </p>
+
+  <p>
+    © 2026 Question Paper Portal
+  </p>
+
+</footer>
+
+
+<script>
+
+  /* ----------------------------------
+     DEFAULT QUESTION PAPERS
+  ---------------------------------- */
+
+  let papers = [
+    {
+      id: 1,
+      title: "BMLT Microbiology",
+      course: "BMLT",
+      studyYear: "2nd Year",
+      subject: "Microbiology",
+      examYear: "2025",
+      file: null
+    },
+
+    {
+      id: 2,
+      title: "BMLT Hematology",
+      course: "BMLT",
+      studyYear: "2nd Year",
+      subject: "Hematology",
+      examYear: "2024",
+      file: null
+    },
+
+    {
+      id: 3,
+      title: "BMLT Biochemistry",
+      course: "BMLT",
+      studyYear: "1st Year",
+      subject: "Biochemistry",
+      examYear: "2025",
+      file: null
+    }
+  ];
+
+
+  /* ----------------------------------
+     LOAD LOCAL STORAGE
+  ---------------------------------- */
+
+  const savedPapers = localStorage.getItem("questionPapers");
+
+  if (savedPapers) {
+    papers = JSON.parse(savedPapers);
+  }
+
+
+  /* ----------------------------------
+     DISPLAY PAPERS
+  ---------------------------------- */
+
+  function displayPapers(list = papers) {
+
+    const container =
+      document.getElementById("papersContainer");
+
+    container.innerHTML = "";
+
+    document.getElementById("paperCount").innerText =
+      list.length + " paper(s) found";
+
+
+    if (list.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <h3>No Question Paper Found</h3>
+          <p>Try another search or filter.</p>
+        </div>
+      `;
+
+      return;
+    }
+
+
+    list.forEach(paper => {
+
+      const card = document.createElement("div");
+
+      card.className = "paper-card";
+
+      card.innerHTML = `
+
+        <div class="pdf-icon">
+          PDF
+        </div>
+
+        <h4>${escapeHTML(paper.title)}</h4>
+
+        <div class="meta">
+          Course: ${escapeHTML(paper.course)}<br>
+          Year: ${escapeHTML(paper.studyYear)}<br>
+          Subject: ${escapeHTML(paper.subject)}<br>
+          Exam: ${escapeHTML(paper.examYear)}
+        </div>
+
+        <div class="tags">
+          <span class="tag">
+            ${escapeHTML(paper.course)}
+          </span>
+
+          <span class="tag">
+            ${escapeHTML(paper.examYear)}
+          </span>
+        </div>
+
+        <div class="buttons">
+
+          ${
+            paper.file
+            ?
+            `
+            <button
+              class="btn view"
+              onclick="viewPDF(${paper.id})">
+              View
+            </button>
+
+            <button
+              class="btn download"
+              onclick="downloadPDF(${paper.id})">
+              Download
+            </button>
+            `
+            :
+            `
+            <button
+              class="btn view"
+              disabled>
+              PDF Not Attached
+            </button>
+            `
+          }
+
+          <button
+            class="btn delete"
+            onclick="deletePaper(${paper.id})">
+            Delete
+          </button>
+
+        </div>
+      `;
+
+      container.appendChild(card);
+
+    });
+  }
+
+
+  /* ----------------------------------
+     SEARCH + FILTER
+  ---------------------------------- */
+
+  function filterPapers() {
+
+    const search =
+      document.getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+    const course =
+      document.getElementById("courseFilter").value;
+
+    const year =
+      document.getElementById("yearFilter").value;
+
+    const subject =
+      document.getElementById("subjectFilter").value;
+
+    const examYear =
+      document.getElementById("paperYearFilter").value;
+
+
+    const filtered = papers.filter(paper => {
+
+      const searchable =
+        (
+          paper.title +
+          " " +
+          paper.course +
+          " " +
+          paper.studyYear +
+          " " +
+          paper.subject +
+          " " +
+          paper.examYear
+        ).toLowerCase();
+
+
+      return (
+
+        searchable.includes(search) &&
+
+        (!course ||
+          paper.course === course) &&
+
+        (!year ||
+          paper.studyYear === year) &&
+
+        (!subject ||
+          paper.subject === subject) &&
+
+        (!examYear ||
+          paper.examYear === examYear)
+
+      );
+
+    });
+
+
+    displayPapers(filtered);
+  }
+
+
+  /* ----------------------------------
+     UPLOAD PAPER
+  ---------------------------------- */
+
+  function uploadPaper() {
+
+    const title =
+      document.getElementById("title").value.trim();
+
+    const course =
+      document.getElementById("course").value;
+
+    const studyYear =
+      document.getElementById("studyYear").value;
+
+    const subject =
+      document.getElementById("subject").value;
+
+    const examYear =
+      document.getElementById("examYear").value;
+
+    const file =
+      document.getElementById("pdfFile").files[0];
+
+
+    if (!title ||
+        !examYear ||
+        !file) {
+
+      alert(
+        "Please enter all details and select a PDF."
+      );
+
+      return;
+    }
+
+
+    if (file.type !== "application/pdf") {
+
+      alert("Only PDF files are allowed.");
+
+      return;
+    }
+
+
+    const reader = new FileReader();
+
+
+    reader.onload = function(e) {
+
+      const newPaper = {
+
+        id: Date.now(),
+
+        title: title,
+
+        course: course,
+
+        studyYear: studyYear,
+
+        subject: subject,
+
+        examYear: examYear,
+
+        file: e.target.result
+
+      };
+
+
+      papers.unshift(newPaper);
+
+
+      savePapers();
+
+      displayPapers();
+
+
+      document.getElementById("title").value = "";
+      document.getElementById("examYear").value = "";
+      document.getElementById("pdfFile").value = "";
+
+
+      alert("Question paper uploaded successfully!");
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+  }
+
+
+  /* ----------------------------------
+     VIEW PDF
+  ---------------------------------- */
+
+  function viewPDF(id) {
+
+    const paper =
+      papers.find(p => p.id === id);
+
+    if (!paper || !paper.file) {
+
+      alert("PDF not available.");
+
+      return;
+    }
+
+
+    const newWindow =
+      window.open();
+
+    newWindow.document.write(`
+
+      <html>
+
+      <head>
+
+        <title>${escapeHTML(paper.title)}</title>
+
+        <style>
+
+          body {
+            margin: 0;
+            background: #222;
+          }
+
+          iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+          }
+
+        </style>
+
+      </head>
+
+      <body>
+
+        <iframe src="${paper.file}"></iframe>
+
+      </body>
+
+      </html>
+
+    `);
+
+  }
+
+
+  /* ----------------------------------
+     DOWNLOAD PDF
+  ---------------------------------- */
+
+  function downloadPDF(id) {
+
+    const paper =
+      papers.find(p => p.id === id);
+
+    if (!paper || !paper.file) {
+
+      alert("PDF not available.");
+
+      return;
+    }
+
+
+    const link =
+      document.createElement("a");
+
+    link.href = paper.file;
+
+    link.download =
+      paper.title.replace(/\s+/g, "_")
+      + "_" +
+      paper.examYear +
+      ".pdf";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+  }
+
+
+  /* ----------------------------------
+     DELETE
+  ---------------------------------- */
+
+  function deletePaper(id) {
+
+    const confirmDelete =
+      confirm(
+        "Are you sure you want to delete this paper?"
+      );
+
+
+    if (!confirmDelete) return;
+
+
+    papers =
+      papers.filter(p => p.id !== id);
+
+
+    savePapers();
+
+    displayPapers();
+
+  }
+
+
+  /* ----------------------------------
+     SAVE
+  ---------------------------------- */
+
+  function savePapers() {
+
+    localStorage.setItem(
+      "questionPapers",
+      JSON.stringify(papers)
+    );
+
+  }
+
+
+  /* ----------------------------------
+     SECURITY
+  ---------------------------------- */
+
+  function escapeHTML(text) {
+
+    return String(text)
+
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* ----------------------------------
+     INITIAL DISPLAY
+  ---------------------------------- */
+
+  displayPapers();
+
+</script>
+
+</body>
+  </html>
